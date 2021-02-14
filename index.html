@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.typekit.net/bou7nvf.css">
+    <title>Day</title>
+    <style>
+      a {
+        color: #999999;
+        text-decoration: none;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      html {
+        font-family: "franklin-gothic-urw", sans-serif;
+        font-size: 125%;
+        line-height: 1.5;
+      }
+
+      .about {
+        box-sizing: border-box;
+        padding: 3rem;
+      }
+
+      .about > * {
+        margin: 0;
+      }
+
+      .about > * + * {
+        margin-top: 1.5rem;
+      }
+
+      .slideshow {
+        padding: 0 3rem 3rem 3rem;
+      }
+
+      .slideshow img {
+        display: block;
+        width: 100%;
+      }
+
+      .slideshow img + img {
+        margin-top: 3rem;
+      }
+
+      .slideshow.active .hidden {
+        opacity: 0;
+      }
+
+      .slideshow.active .last {
+        opacity: 1;
+        z-index: 0;
+      }
+
+      .slideshow.active .current {
+        opacity: 1;
+        z-index: 1;
+        transition: opacity 2s;
+      }
+
+      @media (min-width: 1024px) {
+        body {
+          height: 100%;
+        }
+
+        html {
+          height: 100%;
+        }
+
+        .about {
+          padding: 3rem 1.5rem 3rem 3rem;
+        }
+
+        .layout {
+          display: flex;
+          height: 100%;
+        }
+
+        .layout > *:nth-child(1) {
+          width: 33.3333%;
+        }
+
+        .layout > *:nth-child(2) {
+          width: 66.6666%;
+        }
+
+        .slideshow {
+          position: relative;
+        }
+
+        .slideshow img {
+          bottom: 0;
+          box-sizing: border-box;
+          height: 100%;
+          left: 0;
+          object-fit: cover;
+          padding: 3rem 3rem 3rem 1.5rem;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+
+        .slideshow img + img {
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <div class="about">
+        <p>We&apos;re Day, a new design studio based on both sides of the world.</p>
+        <p>We specialise in memorable brand ideas, executed beautifully.</p>
+        <p>To see more of our work or just have a chat, please contact us at <a href="mailto:hello@byday.studio">hello@byday.studio</a></p>
+      </div>
+
+      <div class="slideshow">
+        <img src="/images/Day1.jpg" />
+        <img src="/images/Day2.jpg" />
+        <img src="/images/Day3.jpg" />
+        <img src="/images/Day4.jpg" />
+        <img src="/images/Day5.jpg" />
+        <img src="/images/Day6.jpg" />
+        <img src="/images/Day7.jpg" />
+        <img src="/images/Day8.jpg" />
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script>
+      $(function() {
+        var $window = $(window);
+        var images = $('img');
+
+        images.addClass('hidden');
+        images.first().addClass('current');
+
+        function fade() {
+          var indexCurrent = $('.current').index('img');
+          var imageCount = $('img').length;
+          var indexNew = (indexCurrent + 1) % imageCount;
+          images.removeClass('last').eq(indexNew - 1).addClass('last');
+          images.removeClass('current').eq(indexNew).addClass('current');
+        }
+
+        function setSlideshowActive() {
+          if ($window.width() < 1024) {
+            $('.slideshow').removeClass('active');
+          } else {
+            $('.slideshow').addClass('active');
+          }
+        }
+
+        setSlideshowActive();
+        $window.resize(setSlideshowActive);
+        window.setInterval(fade, 5000);
+      });
+    </script>
+  </body>
+</html>
