@@ -1,71 +1,54 @@
-document.head = document.head || document.getElementsByTagName('head')[0];
-function changeFavicon(src) {
-    var link = document.createElement('link'), oldLink = document.getElementById('dynamic-favicon');
-    link.id = 'dynamic-favicon';
-    link.rel = 'shortcut icon';
-    link.href = src;
-    if (oldLink) {
-        document.head.removeChild(oldLink);
-    }
-    document.head.appendChild(link);
-    }
-function animate(){
-    if ( typeof animate.i == 'undefined' ) {
-        animate.i = 0;
-    }
-    switch(animate.i) {
-        case 0:
-            changeFavicon("[PUT BASE64 for ICO FRAME 1 HERE]");
-            break;
-        case 1:
-            changeFavicon("[PUT BASE64 for ICO FRAME 2 HERE]");
-            break;
-        case 2:
-            changeFavicon("[PUT BASE64 for ICO FRAME 3 HERE]");
-            break;
-        case 3:
-            changeFavicon("[PUT BASE64 for ICO FRAME 4 HERE]");
-            break;
-        case 4:
-            changeFavicon("[PUT BASE64 for ICO FRAME 5 HERE]");
-            break;
-        case 5:
-            changeFavicon("[PUT BASE64 for ICO FRAME 6 HERE]");
-            break;
-        case 6:
-            changeFavicon("[PUT BASE64 for ICO FRAME 7 HERE]");
-            break;
-        case 7:
-            changeFavicon("[PUT BASE64 for ICO FRAME 8 HERE]");
-            break;
-        case 8:
-            changeFavicon("[PUT BASE64 for ICO FRAME 9 HERE]");
-            break;
-        case 9:
-            changeFavicon("[PUT BASE64 for ICO FRAME 10 HERE]");
-            break;
-        case 10:
-            changeFavicon("[PUT BASE64 for ICO FRAME 11 HERE]");
-            break;
-        case 11:
-            changeFavicon("[PUT BASE64 for ICO FRAME 12 HERE]");
-            break;
-        case 12:
-            changeFavicon("[PUT BASE64 for ICO FRAME 13 HERE]");
-            break;
-        case 13:
-            changeFavicon("[PUT BASE64 for ICO FRAME 14 HERE]");
-            break;
-        case 14:
-            changeFavicon("[PUT BASE64 for ICO FRAME 15 HERE]");
-            break;
-        case 15:
-            changeFavicon("[PUT BASE64 for ICO FRAME 16 HERE]");
-            break;
-    }
-    animate.i = animate.i + 1;
-    if(animate.i == 16){
-        animate.i = 0;
-    }
-}
-setInterval(animate,250);
+var favicon_images = [
+                    'fav/fav00.png',
+                    'fav/fav01.png',
+                    'fav/fav02.png',
+                    'fav/fav03.png',
+                    'fav/fav04.png',
+                    'fav/fav05.png',
+                    'fav/fav06.png',
+                    'fav/fav07.png',
+                    'fav/fav08.png',
+                    'fav/fav09.png',
+                    'fav/fav10.png',
+                    'fav/fav11.png',
+                    'fav/fav12.png',
+                    'fav/fav13.png',
+                    'fav/fav14.png',
+                    'fav/fav15.png',
+                    'fav/fav16.png',
+                    'fav/fav17.png',
+                    'fav/fav18.png',
+                    'fav/fav19.png',
+                    'fav/fav20.png',
+                    'fav/fav21.png',
+                    'fav/fav22.png',
+                    'fav/fav23.png',
+                    'fav/fav24.png',
+                    'fav/fav25.png',
+                    'fav/fav26.png',
+                    'fav/fav27.png',
+                    'fav/fav28.png',
+                    'fav/fav29.png',
+                    'fav/fav30.png',
+                    'fav/fav31.png'
+
+                ],
+    image_counter = 0; // To keep track of the current image
+
+setInterval(function() {
+    // remove current favicon
+    if(document.querySelector("link[rel='icon']") !== null)
+        document.querySelector("link[rel='icon']").remove();
+    if(document.querySelector("link[rel='shortcut icon']") !== null)
+        document.querySelector("link[rel='shortcut icon']").remove();
+        
+    // add new favicon image
+    document.querySelector("head").insertAdjacentHTML('beforeend', '<link rel="icon" href="' + favicon_images[image_counter] + '" type="image/png">');
+    
+    // If last image then goto first image
+    // Else go to next image    
+    if(image_counter == favicon_images.length -1)
+        image_counter = 0;
+    else
+        image_counter++;
+}, 70);
